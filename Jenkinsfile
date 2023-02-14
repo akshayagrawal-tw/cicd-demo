@@ -12,11 +12,8 @@ pipeline {
         }
         */
         stage('Linting') {
-
-           import jenkins.model.*
-           jenkins = Jenkins.instance
            steps{
-                mvn checkstyle:checkstyle
+               sh "mvn checkstyle:checkstyle"
            }
 
         }
