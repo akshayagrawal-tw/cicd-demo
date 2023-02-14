@@ -28,11 +28,7 @@ pipeline {
             }
         }
 
-         post {
-                always {
-                    archiveArtifacts artifacts: 'target/src/**/*.*'
-                }
-            }
+
         stage ('Push to registry') {
             when { expression { return params.Build }} 
             steps {
@@ -42,6 +38,12 @@ pipeline {
                     sh "docker push ${user}/heloapp:latest"
                 }
             }
+
+             post {
+                          always {
+                              archiveArtifacts artifacts: 'target/src/**/*.*'
+                          }
+                      }
         }
         stage ('Deploy') {  
             steps {
