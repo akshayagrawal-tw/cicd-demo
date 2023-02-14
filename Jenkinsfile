@@ -55,5 +55,10 @@ pipeline {
                 }
             }
         }
-    }  
+    }
+    post {
+            always {
+                cleanWs()
+            }
+        }
 } 
