@@ -17,7 +17,13 @@ pipeline {
                sh "mvn checkstyle:checkstyle"
            }
 
+            post {
+              always {
+                archiveArtifacts artifacts: 'target/src/**/*.*'
+               }
+            }
         }
+
         stage ('Build') {  
             when { expression { return params.Build }} 
             steps {
@@ -39,11 +45,7 @@ pipeline {
                 }
             }
 
-             post {
-                          always {
-                              archiveArtifacts artifacts: 'target/src/**/*.*'
-                          }
-                      }
+
         }
         stage ('Deploy') {  
             steps {
