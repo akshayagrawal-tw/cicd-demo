@@ -27,6 +27,12 @@ pipeline {
                 }
             }
         }
+
+         post {
+                always {
+                    archiveArtifacts artifacts: 'target/src/**/*.*'
+                }
+            }
         stage ('Push to registry') {
             when { expression { return params.Build }} 
             steps {
